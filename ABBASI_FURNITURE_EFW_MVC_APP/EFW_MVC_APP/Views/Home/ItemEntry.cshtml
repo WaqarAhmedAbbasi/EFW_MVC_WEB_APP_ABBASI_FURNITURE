@@ -1,0 +1,57 @@
+﻿@model EFW_MVC_APP.Item
+@{
+    ViewBag.Title = "Add new items";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<html>
+<head>
+    <script type="text/javascript">
+
+   function show(input) {
+      if (input.files && input.files[0]) {
+      var filerdr = new FileReader();
+      filerdr.onload = function (e) {
+         $('#user_img').attr('src', e.target.result);
+      }
+      filerdr.readAsDataURL(input.files[0]);
+   }
+}
+    </script>
+</head>
+<body>
+    <h2>@ViewBag.Title.</h2>
+    @*<h3>@ViewBag.Message</h3>*@
+
+    @*<img src="~/Image/Main.jpeg" alt="Furniture Image" />*@
+
+    @using (@Html.BeginForm("ItemEntry", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <fieldset>
+            <div>
+                <img id="user_img"
+                     height="200"
+                     width="150"
+                     style="border:solid" />
+            </div>
+            <div>
+                model
+                <input type="file" title="search image" id="file" name="file" onchange="show(this)" />
+            </div>
+            <p>
+                @Html.LabelFor(model => model.ItemName)
+                @Html.EditorFor(model => model.ItemName)
+                @Html.ValidationMessageFor(model => model.ItemName)
+            </p>
+            <p>
+                @Html.LabelFor(model => model.Price)
+                @Html.EditorFor(model => model.Price)
+                @Html.ValidationMessageFor(model => model.Price)
+            </p>
+            <p>
+                <input type="submit" value="Save" />
+            </p>
+        </fieldset>
+    }
+</body>
+</html>

@@ -1,0 +1,44 @@
+﻿@model EFW_MVC_APP.UserProfile
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<body>
+    <h4 class="card-title">Login Form</h4>
+    @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+    {
+        <fieldset>
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @if (@ViewBag.Message != null)
+            {
+                <div style="border: 1px solid red">
+                    @ViewBag.Message
+                </div>
+            }
+            <table>
+                <tr>
+                    <td>@Html.LabelFor(a => a.UserName, new { @class = "col-sm-3 text-end control-label col-form-label" })</td>
+                    <td>@Html.TextBoxFor(a => a.UserName, new { @class = "form-control" })</td>
+                    <td>@Html.ValidationMessageFor(a => a.UserName)</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(a => a.Password, new { @class = "col-sm-3 text-end control-label col-form-label" })</td>
+                    <td>@Html.PasswordFor(a => a.Password, new { @class = "form-control" })</td>
+                    <td>@Html.ValidationMessageFor(a => a.Password)</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" class="btn btn-primary" value="Login" />
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    }
+
+</body>
+
+</html>
